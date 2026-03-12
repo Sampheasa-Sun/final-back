@@ -1,0 +1,6 @@
+EXCEPTION:
+SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'admins' already exists (Connection: mysql, SQL: create table `admins` (`id` bigint unsigned not null auto_increment primary key, `created_at` timestamp null, `updated_at` timestamp null) default character set utf8mb4 collate 'utf8mb4_unicode_ci')
+
+   INFO  Running migrations.  
+
+  2025_06_26_073840_create_admins_table  6.88ms FAIL
