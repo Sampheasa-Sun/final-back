@@ -40,8 +40,13 @@ class UserController extends Controller
         ));
     }
 
-    public function ban(User $user)
+    public function ban(Request $request, User $user)
     {
+        // If accessed via GET (e.g. browser URL), redirect to manage users
+        if ($request->isMethod('get')) {
+            return redirect()->route('admin.manage.users');
+        }
+
         $user->status = 'banned';
         $user->save();
 
@@ -52,11 +57,16 @@ class UserController extends Controller
             ->performedOn($user)
             ->log('Banned user');
 
-        return redirect()->back()->with('success', 'User has been banned.');
+        return redirect()->route('admin.manage.users')->with('success', 'User has been banned.');
     }
 
-    public function unban(User $user)
+    public function unban(Request $request, User $user)
     {
+        // If accessed via GET (e.g. browser URL), redirect to manage users
+        if ($request->isMethod('get')) {
+            return redirect()->route('admin.manage.users');
+        }
+
         $user->status = 'active';
         $user->save();
 
@@ -65,7 +75,7 @@ class UserController extends Controller
             ->performedOn($user)
             ->log('Unbanned user');
 
-        return redirect()->back()->with('success', 'User has been unbanned.');
+        return redirect()->route('admin.manage.users')->with('success', 'User has been unbanned.');
     }
 
     public function promote(string $email)
