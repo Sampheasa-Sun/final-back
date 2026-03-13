@@ -38,7 +38,9 @@ Route::middleware(['auth:admin'])->group(function () {
 
     Route::get('/manage_user', [UserController::class , 'index'])->name('admin.manage.users');
     Route::post('/manage_user/{user}/ban', [UserController::class , 'ban'])->name('admin.users.ban');
+    Route::get('/manage_user/{user}/ban', fn() => redirect()->route('admin.manage.users'));
     Route::post('/manage_user/{user}/unban', [UserController::class , 'unban'])->name('admin.users.unban');
+    Route::get('/manage_user/{user}/unban', fn() => redirect()->route('admin.manage.users'));
     Route::post('/manage_user/promote/{email}', [UserController::class , 'promote'])->name('admin.users.promote');
     Route::post('/manage_user/demote/{email}', [UserController::class , 'demote'])->name('admin.users.demote');
 
